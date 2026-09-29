@@ -6,13 +6,12 @@ export const loginApi = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       let res = await axiosInstance.post("/api/auth/login", credentials);
-      return res.data.data
+      return res.data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
-  }
-)
-
+  },
+);
 
 export const currentUserApi = createAsyncThunk(
   "/api/me",
@@ -23,8 +22,8 @@ export const currentUserApi = createAsyncThunk(
       return res.data.user;
     } catch (error) {
       return thunkApi.rejectWithValue(
-        error.response?.data?.message || "Unable to get current user"
+        error.response?.data?.message || "Unable to get current user",
       );
     }
-  }
+  },
 );

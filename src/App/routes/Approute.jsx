@@ -11,56 +11,50 @@ import ProtectedRoute from "../ProtectedRoutes/ProtectedRoute";
 import MainPage from "../../features/Products/UI/Pages/MainPage";
 import FavouritePage from "../../features/Products/UI/Components/FavouritePage";
 const Approute = () => {
-  let dispatch=useDispatch()
-  useEffect(()=>{
-    dispatch(currentUserApi())
-  },[])
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(currentUserApi());
+  }, []);
 
   const router = createBrowserRouter([
- {
-  path:"/",
-  element:<PublicRoute/>,
-  children:[
-       {
+    {
       path: "/",
-      element: <AuthLayout/>,
-      children:[
+      element: <PublicRoute />,
+      children: [
         {
-            path:"",
-            element:<Login/>
+          path: "/",
+          element: <AuthLayout />,
+          children: [
+            {
+              path: "",
+              element: <Login />,
+            },
+            {
+              path: "register",
+              element: <Register />,
+            },
+          ],
         },
+      ],
+    },
+    {
+      path: "",
+      element: <ProtectedRoute />,
+      children: [
         {
-            path:"register",
-            element:<Register/>
-        }
-      ]
-    }
-  ]
-
- },
-  {
-    path:"",
-    element:<ProtectedRoute/>,
-    children:[
-        {
-      path: "/product",
-      element: <ProductLayout />,
-      children:[
-        {
-          path:"",
-          element:<MainPage/>,
+          path: "/product",
+          element: <ProductLayout />,
+          children: [
+            {
+              path: "",
+              element: <MainPage />,
+            },
+            { path: "favourite", element: <FavouritePage /> },
+          ],
         },
-            {  path:"favourite",
-          element:<FavouritePage/>
-
-        }
-      ]
-    }
-
-
-    ]
-  }
-  ])
+      ],
+    },
+  ]);
   return <RouterProvider router={router}></RouterProvider>;
 };
 

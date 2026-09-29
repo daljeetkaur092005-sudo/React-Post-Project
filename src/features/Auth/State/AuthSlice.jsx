@@ -23,28 +23,25 @@ const AuthSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginApi.fulfilled, (state, action) => {
-        state.user = action.payload, 
-        state.isAuthenticate = true
+        ((state.user = action.payload), (state.isAuthenticate = true));
         state.isLoading = false;
       })
       .addCase(loginApi.rejected, (state, action) => {
-        state.user =null,
-        state.isAuthenticate = false
+        ((state.user = null), (state.isAuthenticate = false));
         state.isLoading = false;
-      }).addCase(currentUserApi.pending, (state, action) => {
+      })
+      .addCase(currentUserApi.pending, (state, action) => {
         state.isAuthenticate = false;
         state.isLoading = true;
       })
       .addCase(currentUserApi.fulfilled, (state, action) => {
-        state.user = action.payload, 
-        state.isAuthenticate = true
+        ((state.user = action.payload), (state.isAuthenticate = true));
         state.isLoading = false;
       })
       .addCase(currentUserApi.rejected, (state, action) => {
-        state.user =null,
-        state.isAuthenticate = false
+        ((state.user = null), (state.isAuthenticate = false));
         state.isLoading = false;
-      })
+      });
   },
 });
 export const { addUser, removeUser } = AuthSlice.actions;
